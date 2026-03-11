@@ -14,7 +14,10 @@ APEX Schema Docs automates schema context generation using `USER_*` data diction
 
 ## Screenshots
 
-Placeholder: add after screenshots are taken.
+<img width="957" height="422" alt="image" src="https://github.com/user-attachments/assets/7616868b-0624-48df-b6e4-3a763e7da114" />
+<img width="959" height="404" alt="image" src="https://github.com/user-attachments/assets/12935237-772e-4a8b-b725-e213c2059f99" />
+
+
 
 ## Features (V1)
 

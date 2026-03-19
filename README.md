@@ -112,5 +112,5 @@ MIT License. See LICENSE file.
 ## Author
 
 **Hassan Raza**
-Oracle ACE Apprentice | Senior Oracle APEX Developer
+Oracle ACE Associate | Senior Oracle APEX Developer
 [oraclewithhassan.com](https://oraclewithhassan.com)

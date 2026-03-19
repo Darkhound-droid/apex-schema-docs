@@ -19,13 +19,17 @@ APEX Schema Docs automates schema context generation using `USER_*` data diction
 
 
 
-## Features (V1)
+## Features
 
+### V2 (Current)
 - Tables, Columns, and Constraints documentation
+- Views documentation including full query text and column list
+- PL/SQL Package Spec documentation with procedures, functions, arguments, and return types
+- Master generator combining Tables + Views + Packages into one single output
 - Three output formats: Markdown, JSON, Plain Text
 - Token count estimation
 - One-click copy and file download
-- Schema browser with search and multi-select
+- Schema browser with search and multi-select for Tables, Views, and Packages
 - Works on Oracle APEX 22.1+ and Oracle Database 19c+
 
 ## Installation
@@ -92,11 +96,10 @@ Tables Documented: 1
 ```
 
 ## Roadmap
-
-- V1: Tables, Columns, Constraints (current)
-- V2: Views, Triggers, Packages, Procedures
-- V3: DBMS_Scheduler Jobs, Relationships diagram
-- V4: Direct API integration with Claude and OpenAI
+- V1: Tables, Columns, Constraints (done)
+- V2: Views, Package Specs (current)
+- V3: Triggers, Standalone Procedures and Functions, DBMS_Scheduler Jobs
+- V4: Object relationship diagram, Direct API integration with Claude and OpenAI
 
 ## Contributing
 

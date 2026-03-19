@@ -33,14 +33,14 @@ prompt APPLICATION 208863 - APEX Schema Docs
 -- Application Export:
 --   Application:     208863
 --   Name:            APEX Schema Docs
---   Date and Time:   06:15 Thursday March 19, 2026
+--   Date and Time:   19:17 Thursday March 19, 2026
 --   Exported By:     WIZARD
 --   Flashback:       0
 --   Export Type:     Application Export
 --     Pages:                      5
---       Items:                    7
+--       Items:                    9
 --       Processes:                5
---       Regions:                 10
+--       Regions:                 11
 --       Buttons:                  5
 --       Dynamic Actions:          2
 --     Shared Components:
@@ -109,7 +109,7 @@ wwv_imp_workspace.create_flow(
 ,p_substitution_value_01=>'APEX Schema Docs'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_files_version=>11
-,p_version_scn=>15744785098836
+,p_version_scn=>15745077357946
 ,p_print_server_type=>'INSTANCE'
 ,p_file_storage=>'DB'
 ,p_is_pwa=>'Y'
@@ -145,7 +145,7 @@ wwv_flow_imp_shared.create_list(
  p_id=>wwv_flow_imp.id(150133459323611450357)
 ,p_name=>'Navigation Menu'
 ,p_list_status=>'PUBLIC'
-,p_version_scn=>15744764324699
+,p_version_scn=>15745077325241
 );
 wwv_flow_imp_shared.create_list_item(
  p_id=>wwv_flow_imp.id(150133471175517450378)
@@ -158,9 +158,9 @@ wwv_flow_imp_shared.create_list_item(
 wwv_flow_imp_shared.create_list_item(
  p_id=>wwv_flow_imp.id(150133840695042464274)
 ,p_list_item_display_sequence=>20
-,p_list_item_link_text=>'Select Tables'
-,p_list_item_link_target=>'f?p=&APP_ID.:2:&APP_SESSION.::&DEBUG.:::'
-,p_list_item_icon=>'fa-table-cursor'
+,p_list_item_link_text=>'Select Objects'
+,p_list_item_link_target=>'f?p=&APP_ID.:2:&SESSION.::&DEBUG.::::'
+,p_list_item_icon=>'fa-database-heart'
 ,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
 ,p_list_item_current_for_pages=>'2'
 );
@@ -983,8 +983,8 @@ wwv_flow_imp_shared.create_menu_option(
 wwv_flow_imp_shared.create_menu_option(
  p_id=>wwv_flow_imp.id(150133841503479464276)
 ,p_parent_id=>wwv_flow_imp.id(150133459073219450357)
-,p_short_name=>'Select Tables'
-,p_link=>'f?p=&APP_ID.:2:&APP_SESSION.::&DEBUG.:::'
+,p_short_name=>'Select Objects'
+,p_link=>'f?p=&APP_ID.:2:&SESSION.::&DEBUG.:::'
 ,p_page_id=>2
 );
 wwv_flow_imp_shared.create_menu_option(
@@ -1172,9 +1172,9 @@ prompt --application/pages/page_00002
 begin
 wwv_flow_imp_page.create_page(
  p_id=>2
-,p_name=>'Select Tables'
-,p_alias=>'SELECT-TABLES'
-,p_step_title=>'Select Tables'
+,p_name=>'Select Objects'
+,p_alias=>'SELECT-OBJECTS'
+,p_step_title=>'Select Objects'
 ,p_warn_on_unsaved_changes=>'N'
 ,p_autocomplete_on_off=>'OFF'
 ,p_page_template_options=>'#DEFAULT#'
@@ -1186,7 +1186,7 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_name=>'Container'
 ,p_region_template_options=>'#DEFAULT#:t-Region--hideHeader js-addHiddenHeadingRoleDesc:t-Region--noUI:t-Region--scrollBody'
 ,p_plug_template=>4072358936313175081
-,p_plug_display_sequence=>10
+,p_plug_display_sequence=>20
 ,p_location=>null
 ,p_attributes=>wwv_flow_t_plugin_attributes(wwv_flow_t_varchar2(
   'expand_shortcuts', 'N',
@@ -1194,7 +1194,7 @@ wwv_flow_imp_page.create_page_plug(
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(150133753240048102904)
-,p_plug_name=>'Table Selection'
+,p_plug_name=>'Select Objects'
 ,p_parent_plug_id=>wwv_flow_imp.id(150133752924193102901)
 ,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody'
 ,p_plug_template=>4072358936313175081
@@ -1213,6 +1213,17 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_template=>4072358936313175081
 ,p_plug_display_sequence=>10
 ,p_plug_display_point=>'SUB_REGIONS'
+,p_location=>null
+,p_attributes=>wwv_flow_t_plugin_attributes(wwv_flow_t_varchar2(
+  'expand_shortcuts', 'N',
+  'output_as', 'HTML')).to_clob
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(150133756325318102935)
+,p_plug_name=>'Hidden Items'
+,p_region_template_options=>'#DEFAULT#'
+,p_plug_template=>4501440665235496320
+,p_plug_display_sequence=>10
 ,p_location=>null
 ,p_attributes=>wwv_flow_t_plugin_attributes(wwv_flow_t_varchar2(
   'expand_shortcuts', 'N',
@@ -1253,7 +1264,6 @@ wwv_flow_imp_page.create_page_branch(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(150133753398387102905)
 ,p_name=>'P2_SELECTED_TABLES'
-,p_is_required=>true
 ,p_item_sequence=>10
 ,p_item_plug_id=>wwv_flow_imp.id(150133753240048102904)
 ,p_prompt=>'Select Tables'
@@ -1286,6 +1296,47 @@ wwv_flow_imp_page.create_page_item(
 ,p_attributes=>wwv_flow_t_plugin_attributes(wwv_flow_t_varchar2(
   'number_of_columns', '3',
   'page_action_on_selection', 'NONE')).to_clob
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(150133756157270102933)
+,p_name=>'P2_SELECTED_VIEWS'
+,p_item_sequence=>20
+,p_item_plug_id=>wwv_flow_imp.id(150133753240048102904)
+,p_prompt=>'Select Views'
+,p_display_as=>'NATIVE_CHECKBOX'
+,p_lov=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'SELECT view_name AS display_value,',
+'       view_name AS return_value',
+'FROM   user_views',
+'ORDER BY view_name'))
+,p_field_template=>1609121967514267634
+,p_item_template_options=>'#DEFAULT#'
+,p_lov_display_extra=>'YES'
+,p_attributes=>wwv_flow_t_plugin_attributes(wwv_flow_t_varchar2(
+  'number_of_columns', '3')).to_clob
+,p_multi_value_type=>'SEPARATED'
+,p_multi_value_separator=>':'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(150133756274096102934)
+,p_name=>'P2_SELECTED_PACKAGES'
+,p_item_sequence=>30
+,p_item_plug_id=>wwv_flow_imp.id(150133753240048102904)
+,p_prompt=>'Select Packages'
+,p_display_as=>'NATIVE_CHECKBOX'
+,p_lov=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'SELECT object_name AS display_value,',
+'       object_name AS return_value',
+'FROM   user_objects',
+'WHERE  object_type = ''PACKAGE''',
+'ORDER BY object_name'))
+,p_field_template=>1609121967514267634
+,p_item_template_options=>'#DEFAULT#'
+,p_lov_display_extra=>'YES'
+,p_attributes=>wwv_flow_t_plugin_attributes(wwv_flow_t_varchar2(
+  'number_of_columns', '3')).to_clob
+,p_multi_value_type=>'SEPARATED'
+,p_multi_value_separator=>':'
 );
 end;
 /
@@ -1495,11 +1546,23 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'BEGIN',
 '  IF :P2_OUTPUT_FORMAT = ''MARKDOWN'' THEN',
-'    :P3_OUTPUT := apex_schema_docs_pkg.generate_markdown(:P2_SELECTED_TABLES);',
+'    :P3_OUTPUT := apex_schema_docs_pkg.generate_full_markdown(',
+'                    p_table_names   => :P2_SELECTED_TABLES,',
+'                    p_view_names    => :P2_SELECTED_VIEWS,',
+'                    p_package_names => :P2_SELECTED_PACKAGES',
+'                  );',
 '  ELSIF :P2_OUTPUT_FORMAT = ''JSON'' THEN',
-'    :P3_OUTPUT := apex_schema_docs_pkg.generate_json(:P2_SELECTED_TABLES);',
+'    :P3_OUTPUT := apex_schema_docs_pkg.generate_full_json(',
+'                    p_table_names   => :P2_SELECTED_TABLES,',
+'                    p_view_names    => :P2_SELECTED_VIEWS,',
+'                    p_package_names => :P2_SELECTED_PACKAGES',
+'                  );',
 '  ELSE',
-'    :P3_OUTPUT := apex_schema_docs_pkg.generate_plain_text(:P2_SELECTED_TABLES);',
+'    :P3_OUTPUT := apex_schema_docs_pkg.generate_full_plain_text(',
+'                    p_table_names   => :P2_SELECTED_TABLES,',
+'                    p_view_names    => :P2_SELECTED_VIEWS,',
+'                    p_package_names => :P2_SELECTED_PACKAGES',
+'                  );',
 '  END IF;',
 'END;'))
 ,p_process_clob_language=>'PLSQL'

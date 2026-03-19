@@ -1107,15 +1107,32 @@ CREATE OR REPLACE PACKAGE BODY apex_schema_docs_pkg AS
     RETURN SYS_REFCURSOR IS
     l_cursor SYS_REFCURSOR;
   BEGIN
-    OPEN l_cursor FOR
-      SELECT v.view_name,
-             get_view_column_count(v.view_name) AS column_count,
-             tc.comments
-        FROM user_views v
-        LEFT JOIN user_tab_comments tc
-          ON tc.table_name = v.view_name
-         AND tc.table_type = 'VIEW'
-       ORDER BY v.view_name;
+    BEGIN
+      OPEN l_cursor FOR
+        'SELECT v.view_name,
+                (SELECT COUNT(*)
+                   FROM user_view_columns c
+                  WHERE c.view_name = v.view_name) AS column_count,
+                tc.comments
+           FROM user_views v
+           LEFT JOIN user_tab_comments tc
+             ON tc.table_name = v.view_name
+            AND tc.table_type = ''VIEW''
+          ORDER BY v.view_name';
+    EXCEPTION
+      WHEN OTHERS THEN
+        OPEN l_cursor FOR
+          'SELECT v.view_name,
+                  (SELECT COUNT(*)
+                     FROM user_tab_columns c
+                    WHERE c.table_name = v.view_name) AS column_count,
+                  tc.comments
+             FROM user_views v
+             LEFT JOIN user_tab_comments tc
+               ON tc.table_name = v.view_name
+              AND tc.table_type = ''VIEW''
+            ORDER BY v.view_name';
+    END;
 
     RETURN l_cursor;
   END get_view_list;
